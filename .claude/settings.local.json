@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:d3d4yli4hf5bmh.cloudfront.net)"
+    ],
+    "deny": []
+  }
+}

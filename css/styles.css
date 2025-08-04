@@ -1,0 +1,347 @@
+:root {
+    --mint: #D8F2D5;
+    --forest-green: #1F4E23;
+    --teal: #38A29D;
+    --calico-orange: #EFA63C;
+    --charcoal: #231F20;
+    --cream: #F5EADA;
+    --white: #FFFFFF;
+}
+
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--white);
+    margin: 0;
+    padding: 0;
+    color: var(--charcoal);
+    line-height: 1.6;
+}
+
+.header {
+    background: var(--charcoal);
+    padding: 16px 0;
+    text-align: center;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+.header-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin: 0;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+}
+
+.album-section {
+    position: relative;
+}
+
+.album-art-large {
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.track-info-section {
+    padding-left: 32px;
+}
+
+.artist-name {
+    font-family: "Montserrat", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+}
+
+.track-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 32px 0;
+    line-height: 1.3;
+}
+
+.album-info {
+    font-size: 1rem;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+    opacity: 0.8;
+}
+
+.audio-player {
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.stream-info {
+    background: var(--cream);
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 32px;
+    font-size: 0.9em;
+    color: var(--charcoal);
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.quality-info {
+    margin-bottom: 32px;
+}
+
+.quality-line {
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.rating-and-player {
+    margin-bottom: 32px;
+}
+
+.audio-player-custom {
+    width: 100%;
+    margin-top: 16px;
+    background: var(--charcoal);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: var(--white);
+}
+
+.audio-player-custom::-webkit-media-controls-panel {
+    background-color: var(--charcoal);
+    color: var(--white);
+}
+
+.audio-player-custom::-webkit-media-controls-play-button,
+.audio-player-custom::-webkit-media-controls-pause-button {
+    background-color: var(--white);
+    border-radius: 50%;
+    filter: invert(0);
+}
+
+.audio-player-custom::-webkit-media-controls-volume-slider,
+.audio-player-custom::-webkit-media-controls-timeline {
+    background-color: #444;
+}
+
+.audio-player-custom::-webkit-media-controls-current-time-display,
+.audio-player-custom::-webkit-media-controls-time-remaining-display {
+    color: var(--white);
+    text-shadow: none;
+}
+
+.audio-player-custom::-webkit-media-controls-mute-button,
+.audio-player-custom::-webkit-media-controls-fullscreen-button {
+    filter: invert(1);
+}
+
+.footer {
+    background: var(--mint);
+    padding: 32px 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.previous-tracks-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 24px 0;
+}
+
+.previous-track {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+}
+
+.previous-track-artist {
+    font-weight: 600;
+}
+
+.previous-track-title {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.album-art-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.album-art {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.album-art-placeholder {
+    width: 80px;
+    height: 80px;
+    background: var(--mint);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: var(--forest-green);
+}
+
+.track-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.rating-section {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rating-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.rating-btn {
+    background: transparent;
+    border: 2px solid var(--forest-green);
+    color: var(--forest-green);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-btn:hover {
+    background: var(--mint);
+    transform: scale(1.05);
+}
+
+.rating-btn.active {
+    background: var(--forest-green);
+    color: var(--white);
+}
+
+.rating-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.rating-message {
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-top: 5px;
+    min-height: 16px;
+}
+
+.recent-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recent-track {
+    background: var(--white);
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid var(--teal);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.recent-track-title {
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 2px;
+}
+
+.recent-track-artist {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+.loading {
+    text-align: center;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .track-info-section {
+        padding-left: 0;
+    }
+    
+    .artist-name {
+        font-size: 2rem;
+    }
+    
+    .track-title {
+        font-size: 1.5rem;
+    }
+}
