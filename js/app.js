@@ -18,6 +18,7 @@ function initializePlayer() {
         
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
             status.textContent = 'Stream loaded successfully';
+            updateStreamQuality();
         });
         
         hls.on(Hls.Events.ERROR, function(event, data) {
@@ -25,12 +26,21 @@ function initializePlayer() {
             status.textContent = 'Error loading stream: ' + data.details;
         });
         
+        hls.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
+            updateStreamQuality();
+        });
+        
         
     } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
         audioPlayer.src = streamUrl;
         status.textContent = 'Using native HLS support';
+        // Update quality info for native HLS
+        updateStreamQuality();
     } else {
         status.textContent = 'HLS not supported in this browser';
+        // Show fallback quality info
+        document.getElementById('sourceQuality').textContent = 'Source quality: Unknown';
+        document.getElementById('streamQuality').textContent = 'Stream quality: Not supported';
     }
 }
 
@@ -64,6 +74,47 @@ audioPlayer.addEventListener('error', function(e) {
 const metadataUrl = 'https://d3d4yli4hf5bmh.cloudfront.net/metadatav2.json';
 const apiUrl = 'http://localhost:5001/api';
 let currentTrack = null;
+
+function updateStreamQuality() {
+    const sourceQualityEl = document.getElementById('sourceQuality');
+    const streamQualityEl = document.getElementById('streamQuality');
+    
+    if (hls && hls.levels && hls.levels.length > 0) {
+        const currentLevel = hls.levels[hls.currentLevel] || hls.levels[0];
+        
+        if (currentLevel) {
+            // Extract stream quality information
+            const bitrate = currentLevel.bitrate ? Math.round(currentLevel.bitrate / 1000) : 'Unknown';
+            const codec = currentLevel.audioCodec || 'Unknown';
+            
+            // Format codec information
+            let codecDisplay = codec;
+            if (codec.includes('mp4a.40.2')) {
+                codecDisplay = 'AAC-LC';
+            } else if (codec.includes('mp4a.40.5')) {
+                codecDisplay = 'AAC-HE';
+            } else if (codec.includes('flac')) {
+                codecDisplay = 'FLAC';
+            }
+            
+            // Update stream quality display
+            streamQualityEl.textContent = `Stream quality: ${bitrate}kbps ${codecDisplay} / HLS`;
+            
+            // For source quality, we'll show the stream info since we don't have separate source metadata
+            sourceQualityEl.textContent = `Source quality: ${codecDisplay} ${bitrate}kbps`;
+        } else {
+            streamQualityEl.textContent = 'Stream quality: HLS Lossless';
+            sourceQualityEl.textContent = 'Source quality: Unknown';
+        }
+    } else if (audioPlayer.src) {
+        // Fallback for non-HLS browsers
+        streamQualityEl.textContent = 'Stream quality: HLS Lossless (Native)';
+        sourceQualityEl.textContent = 'Source quality: Unknown';
+    } else {
+        streamQualityEl.textContent = 'Stream quality: Loading...';
+        sourceQualityEl.textContent = 'Source quality: Loading...';
+    }
+}
 
 async function fetchMetadata() {
     try {
