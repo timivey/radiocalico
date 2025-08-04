@@ -30,7 +30,6 @@ function initializePlayer() {
             updateStreamQuality();
         });
         
-        
     } else if (audioPlayer.canPlayType('application/vnd.apple.mpegurl')) {
         audioPlayer.src = streamUrl;
         status.textContent = 'Using native HLS support';
@@ -80,7 +79,9 @@ function updateStreamQuality() {
     const streamQualityEl = document.getElementById('streamQuality');
     
     if (hls && hls.levels && hls.levels.length > 0) {
-        const currentLevel = hls.levels[hls.currentLevel] || hls.levels[0];
+        // Handle case where currentLevel is -1 (auto-selection)
+        const levelIndex = hls.currentLevel >= 0 ? hls.currentLevel : 0;
+        const currentLevel = hls.levels[levelIndex];
         
         if (currentLevel) {
             // Extract stream quality information
@@ -95,13 +96,17 @@ function updateStreamQuality() {
                 codecDisplay = 'AAC-HE';
             } else if (codec.includes('flac')) {
                 codecDisplay = 'FLAC';
+            } else if (codec.includes('opus')) {
+                codecDisplay = 'Opus';
+            } else if (codec.includes('mp3')) {
+                codecDisplay = 'MP3';
             }
             
             // Update stream quality display
             streamQualityEl.textContent = `Stream quality: ${bitrate}kbps ${codecDisplay} / HLS`;
             
-            // For source quality, we'll show the stream info since we don't have separate source metadata
-            sourceQualityEl.textContent = `Source quality: ${codecDisplay} ${bitrate}kbps`;
+            // Show clearer source quality messaging
+            sourceQualityEl.textContent = `Source quality: Live Stream (${codecDisplay})`;
         } else {
             streamQualityEl.textContent = 'Stream quality: HLS Lossless';
             sourceQualityEl.textContent = 'Source quality: Unknown';
